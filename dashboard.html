@@ -35,10 +35,20 @@
             margin-bottom: 20px;
         }
 
-        /* #p1{
-            color: rgb(167, 34, 61);
-        } */
+        .graph-heading {
+    text-align: center;
+    font-size: 18px;
+    color: #333;
+    margin: 0 auto 10px; /* Center horizontally with auto margin, and add margin-bottom */
+    background-color: #f8f9fa; /* Light gray background color */
+    padding: 5px; /* Add padding for better visibility */
+    border-radius: 8px; /* Add border radius for a rounded look */
+}
 
+
+        h2 {
+            text-align: center; /* Center-align the welcome heading */
+        }
     </style>
 </head>
 <body>
@@ -73,12 +83,13 @@
             <p>30</p>
         </div>
 
-        <h2>Welcome to Your Dashboard</h2>
+        <h2>Welcome to Dashboard</h2>
 
         <canvas id="revenueByLocation" width="200" height="100"></canvas>
+        <div class="graph-heading">Revenue by Location</div>
 
         <canvas id="revenueByJobType" width="200" height="100"></canvas>
-
+        <div class="graph-heading">Revenue by Job Type</div>
 
     </div>
 
