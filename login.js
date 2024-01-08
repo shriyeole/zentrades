@@ -1,67 +1,39 @@
-        document.addEventListener('DOMContentLoaded', function() {
-            const usernameInput = document.getElementById('username');
-            const passwordInput = document.getElementById('password');
-            const loginButton = document.getElementById('loginButton');
-            const errorContainer = document.getElementById('errorContainer');
+function validateForm() {
+    var usernameInput = document.getElementById('username');
+    var passwordInput = document.getElementById('password');
+    var usernameError = document.getElementById('username-error');
+    var passwordError = document.getElementById('password-error');
 
-            // Email validation for username
-            usernameInput.addEventListener('input', function() {
-                const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(usernameInput.value);
-                if (!isValidEmail) {
-                    usernameInput.setCustomValidity('Please enter a valid email address');
-                } else {
-                    usernameInput.setCustomValidity('');
-                }
-                displayErrorMessages();
-            });
+    var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(usernameInput.value)) {
+        usernameInput.classList.add('error');
+        usernameError.innerHTML = 'Enter a valid email address';
+        return false;
+    } else {
+        usernameInput.classList.remove('error');
+        usernameError.innerHTML = '';
+    }
 
-            // Password validation
-            passwordInput.addEventListener('input', function() {
-                const passwordValue = passwordInput.value;
-                const containsUppercase = /[A-Z]/.test(passwordValue);
-                const containsNumber = /\d/.test(passwordValue);
-                const containsValidSpecialChar = /[@]/.test(passwordValue);
-                const containsInvalidSpecialChar = /[^A-Za-z0-9@]/.test(passwordValue);
+    var passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?!.*[^A-Za-z\d@]).*$/;
+    if (!passwordRegex.test(passwordInput.value)) {
+        passwordInput.classList.add('error');
+        passwordError.innerHTML = 'Password must contain an uppercase letter, a number, and only "@" as a special character';
+        return false;
+    } else {
+        passwordInput.classList.remove('error');
+        passwordError.innerHTML = '';
+    }
 
-                if (!containsUppercase || !containsNumber || containsInvalidSpecialChar) {
-                    passwordInput.setCustomValidity('Password must have an uppercase letter, a number, and only allow @ as a special character.');
-                } else {
-                    passwordInput.setCustomValidity('');
-                }
-                displayErrorMessages();
-            });
 
-            // Login button validation
-            loginButton.addEventListener('click', function() {
-                const isUsernameValid = usernameInput.checkValidity();
-                const isPasswordValid = passwordInput.checkValidity();
+    window.location.href = 'dashboard.html';   
+    return false;
+}
 
-                if (isUsernameValid && isPasswordValid) {
-                    // Add your login logic here (e.g., redirect to another page)
-                    alert('Login successful!');
-                } else {
-                    displayErrorMessages();
-                }
-            });
+document.getElementById('password').addEventListener('input', function () {
+    this.type = 'password';
+});
 
-            // Toggle password visibility
-            const togglePassword = document.getElementById('togglePassword');
-            togglePassword.addEventListener('click', function() {
-                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-                passwordInput.setAttribute('type', type);
-            });
 
-            function displayErrorMessages() {
-                errorContainer.innerHTML = ''; // Clear previous error messages
+//
 
-                if (!usernameInput.checkValidity()) {
-                    errorContainer.innerHTML += '<p>Please enter a valid email address</p>';
-                }
 
-                if (!passwordInput.checkValidity()) {
-                    const passwordErrorMessage = 'Password must have an uppercase letter, a number, and only allow @ as a special character.';
-                    errorContainer.innerHTML += `<p>${passwordErrorMessage}</p>`;
-                }
-            }
-        });
-    

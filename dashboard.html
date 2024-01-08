@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .dashboard-container {
+            padding: 20px;
+            margin: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .metric-block {
+            flex-basis: calc(33.33% - 20px);
+            background-color: #63a09d;
+            color: #fff;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        canvas {
+            max-width: 100%;
+            margin-bottom: 20px;
+        }
+
+        /* #p1{
+            color: rgb(167, 34, 61);
+        } */
+
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <div class="metric-block">
+            <h4>Revenue</h4>
+            <p id="p1">$50,000</p>
+        </div>
+
+        <div class="metric-block">
+            <h4>Total Jobs Avg</h4>
+            <p>100</p>
+        </div>
+
+        <div class="metric-block">
+            <h4>Tickets Created</h4>
+            <p>50</p>
+        </div>
+
+        <div class="metric-block">
+            <h4>Outstanding Amount</h4>
+            <p>$20,000</p>
+        </div>
+
+        <div class="metric-block">
+            <h4>Jobs Completed</h4>
+            <p>80</p>
+        </div>
+
+        <div class="metric-block">
+            <h4>Memberships Sold</h4>
+            <p>30</p>
+        </div>
+
+        <h2>Welcome to Your Dashboard</h2>
+
+        <canvas id="revenueByLocation" width="200" height="100"></canvas>
+
+        <canvas id="revenueByJobType" width="200" height="100"></canvas>
+
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var ctx1 = document.getElementById('revenueByLocation').getContext('2d');
+            var revenueByLocation = new Chart(ctx1, {
+                type: 'bar',
+                data: {
+                    labels: ['Location A', 'Location B', 'Location C', 'Location D'],
+                    datasets: [{
+                        label: 'Revenue',
+                        data: [5000, 10000, 15000, 20000],
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+            var ctx2 = document.getElementById('revenueByJobType').getContext('2d');
+            var revenueByJobType = new Chart(ctx2, {
+                type: 'bar',
+                data: {
+                    labels: ['Type A', 'Type B', 'Type C', 'Type D'],
+                    datasets: [{
+                        label: 'Revenue',
+                        data: [8000, 12000, 10000, 15000],
+                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
